@@ -1,0 +1,124 @@
+
+<!--
+ * @Author: nghiemtv.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gửi người anh yêu Hồng chân</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style0.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="typing">
+        <h2 class="header-sub-title" id="word"></h2>
+        <h2 class="header-sub-title blink">|</h2>
+      </div>
+      <audio controls autoplay loop="loop"><source src="music.mp3" /></audio>
+      <div class="box">
+        <ul class="minbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <ol class="maxbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script src="/TweenMax.min.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+
+      if (
+        navigator.userAgent.match(
+          /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        var box = document.querySelectorAll(".box")[0];
+        console.log(box, "移动端");
+        box.style.left = "42%";
+      }
+      const words = [
+        "❤ Ngày Quốc tế Phụ nữ 8/3.。!",
+        "❤ Anh thật may mắn vì có em trong đời.。!",
+        "❤ Từ ngày quen em, anh thấy cuộc sống của mình thú vị và ý nghĩa hơn.。!",
+        "❤ Tình yêu thật là điều kì diệu, cảm ơn em đã mang nó đến cho anh.。!",
+        "❤ Anh không giỏi trong tình yêu, nhưng Anh yêu Em từ sâu trong Trái Tim <3 .。!",
+        "❤ Anh Ước gì 1 ngày có 25 giờ , để 1 giờ Anh không nhớ tới em .。!",
+        "❤ Đời có bao nhiêu món quà kỳ diệu, cho Anh gặp Em giữa biển người mênh mông!",
+        "❤ Cảm ơn em đã xuất hiện trong cuộc đời anh.。!",
+        "❤ Cùng Anh chia sẻ những thăng trầm.。!",
+        "❤ Chắc em đã nghe bài hát ‘Khi hai ta chung một nhà’ rồi. Đó cũng chính là mơ ước của anh.。!",
+        "❤ Nhân ngày 8/3, anh gửi lời cảm ơn đến người con gái anh thương và mong em luôn đồng hành cùng anh trong cuộc sống.。!",
+      ];
+      let PPP = 0;
+      let timer;
+      let deleteDelay = 3000;
+      let typeSpeed = 100;
+      let delSpeed = 50;
+      function typingEffect() {
+        console.log(i, "iiii");
+        console.log(words[PPP], "words[i]");
+        let word = words[PPP].split("");
+        var loopTyping = function () {
+          if (word.length > 0) {
+            document.getElementById("word").innerHTML += word.shift();
+          } else {
+            delay(function () {
+              deletingEffect(); 
+            }, deleteDelay); 
+            return false;
+          }
+          timer = setTimeout(loopTyping, typeSpeed);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[PPP].split("");
+        var loopDeleting = function () {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById("word").innerHTML = word.join("");
+          } else {
+            if (words.length > PPP + 1) {
+              PPP++;
+            } else {
+              PPP = 0;
+            }
+            typingEffect();
+            return false;
+          }
+
+          timer = setTimeout(loopDeleting, delSpeed);
+        };
+
+        loopDeleting();
+      }
+
+      var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+      typingEffect();
+    </script>
+  </body>
+</html>
